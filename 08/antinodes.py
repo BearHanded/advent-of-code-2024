@@ -2,8 +2,6 @@ from util import assert_equals, file_to_array
 
 INPUT = 'input.txt'
 TEST_INPUT = 'test_input.txt'
-OPERATIONS = [lambda x, y: x * y, lambda x, y: x + y, ]
-concat_fn = lambda x, y : int(str(x) + str(y))
 
 def count_antinodes(file):
   antenna_map = file_to_array(file)

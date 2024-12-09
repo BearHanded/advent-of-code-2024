@@ -2,17 +2,13 @@ from util import assert_equals, file_as_string
 
 INPUT = 'input.txt'
 TEST_INPUT = 'test_input.txt'
-OPERATIONS = [lambda x, y: x * y, lambda x, y: x + y, ]
-concat_fn = lambda x, y : int(str(x) + str(y))
 
 def checksum(file, whole_file=False):
   filesystem = file_as_string(file)
   disk = to_disk(filesystem)
   defragged = defrag_whole(disk) if whole_file else defrag(disk)
 
-  total = sum((idx * value if value != "." else 0) for idx, value in enumerate(defragged))
-
-  return total
+  return sum((idx * value if value != "." else 0) for idx, value in enumerate(defragged))
 
 
 def to_disk(filesystem):
@@ -28,7 +24,6 @@ def to_disk(filesystem):
 def defrag(disk):
   left = 0
   right = len(disk) - 1
-
 
   while left < right:
     left_ready = False
@@ -85,7 +80,6 @@ def defrag_whole(disk):
             break
         left_size = left_b - left + 1
         if left_size >= right_size:
-          # do the thing
           disk[left : left+right_size] = disk[right_b:right+1]
           disk[right_b:right+1] = ["."] * right_size
           break
@@ -93,10 +87,9 @@ def defrag_whole(disk):
           left = left_b + 1
       else:
         left += 1
-
     right = right_b - 1
-
   return disk
+
 assert_equals(checksum(TEST_INPUT), 1928)
 print("Part One: ", checksum(INPUT))
 assert_equals(checksum(TEST_INPUT, whole_file=True), 2858)
