@@ -1,16 +1,18 @@
 from itertools import groupby
 
 
-def get_file_and_print(filename):
+def get_file_and_print(filename, silent):
     fp = open(filename, 'r')
+    if silent:
+        return fp
     print(BColors.OKGREEN + "--------")
     print("IMPORTING ", filename)
     print("--------" + BColors.ENDC)
     return fp
 
 
-def file_to_array(filename):
-    fp = get_file_and_print(filename)
+def file_to_array(filename, silent=False):
+    fp = get_file_and_print(filename, silent)
     input_iterable = map(lambda x: x.replace("\n", ""), fp.readlines())
     input_array = list(input_iterable)
     return input_array
